@@ -27,3 +27,26 @@ const promiseThree = new Promise(function(resolve, reject) {
 promiseThree.then(function(user) {
     console.log(user)
 })
+
+const promiseFour = new Promise((resolve, reject) => {
+    let error = false
+    setTimeout(() => {
+        if(!error) {
+            resolve({username: "Ali", email: "example@example.com"})
+        } else {
+            reject("Error: Something went wrong!")
+        }
+    }, 1000);
+    
+})
+
+promiseFour.then((user) =>{
+    console.log(user)
+    return {username: user.username, email:user.email}
+}).then((user) => {
+    console.log(user.username)
+    console.log(user.email)
+}).catch((error) => {
+    console.log(error)
+}).finally(() => console.log("The promise is either resolved or rejected")
+)
